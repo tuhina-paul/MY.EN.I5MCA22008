@@ -1,6 +1,6 @@
 type NotificationType = 'Placement' | 'Result' | 'Event';
 
-// Renamed from 'Notification' to 'AppNotification' to avoid global naming conflict
+
 interface AppNotification {
     ID: string;
     Type: NotificationType;
