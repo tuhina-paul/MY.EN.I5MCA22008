@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import { Campaign, AssignmentTurnedIn, Event } from '@mui/icons-material';
 
-// Define Notification Types
+
 type NotificationType = 'Placement' | 'Result' | 'Event';
 
 interface AppNotification {
@@ -15,7 +15,7 @@ interface AppNotification {
   Timestamp: string;
 }
 
-// Priority Weights: Placement (3) > Result (2) > Event (1)
+
 const WEIGHTS: Record<NotificationType, number> = {
   'Placement': 3,
   'Result': 2,
@@ -28,12 +28,12 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Base API URL from Stage 6/7 documentation
+      
       const API_URL = 'http://20.207.122.201/evaluation-service/notifications';
       const TOKEN = 'PTBMmQ'; 
 
       try {
-        // Implementing 'limit' query parameter as per Stage 7 requirements
+        
         const response = await fetch(`${API_URL}?limit=10`, {
           headers: { 'Authorization': `Bearer ${TOKEN}` }
         });
@@ -45,7 +45,7 @@ const App: React.FC = () => {
           data = json.notifications;
         } else {
           console.warn('API Error or Unauthorized. Loading sample data for evaluation proof.');
-          // Mock data aligned with your project requirements
+          
           data = [
             { ID: "b283218f", Type: "Placement", Message: "CSX Corporation hiring drive", Timestamp: "2026-04-22 17:51:18" },
             { ID: "8a7412bd", Type: "Placement", Message: "AMD Hiring: Application deadline", Timestamp: "2026-04-22 17:49:42" },
@@ -56,7 +56,7 @@ const App: React.FC = () => {
           ];
         }
 
-        // Sorting Logic: Higher Weight first, then most recent Timestamp
+        
         const sorted = data.sort((a, b) => {
           const weightDiff = WEIGHTS[b.Type] - WEIGHTS[a.Type];
           if (weightDiff !== 0) return weightDiff;
@@ -99,7 +99,7 @@ const App: React.FC = () => {
   return (
     <Container maxWidth="sm" sx={{ mt: 4, mb: 4 }}>
       <Paper elevation={4} sx={{ p: 0, borderRadius: 3, overflow: 'hidden' }}>
-        {/* Header Section as requested in image_87be54.png */}
+        
         <Box sx={{ p: 3, bgcolor: '#1976d2', color: 'white', textAlign: 'center' }}>
           <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
             Priority Inbox
